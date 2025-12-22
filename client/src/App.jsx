@@ -6,6 +6,10 @@ import { Dashboard } from "./pages/dashboard"
 import AppLayout from "./pages/AppLayout"
 import Login from "./pages/Login"
 import Register from "./pages/register"
+import About from "./pages/About"
+import Careers from "./pages/Careers"
+import Contact from "./pages/Contact"
+import Blog from "./pages/Blog"
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +28,22 @@ function App() {
         {
           path:"/login",
           element:<Login/>
+        },
+        {
+          path:"/about",
+          element:<About/>
+        },
+        {
+          path:"/careers",
+          element:<Careers/>
+        },
+        {
+          path:"/blog",
+          element:<Blog/>
+        },
+        {
+          path:"/contact",
+          element:<Contact/>
         },
         {
           path:"/details",
@@ -49,22 +69,3 @@ function App() {
 }
 
 export default App
-
-// 3. "How it Works" Section
-// Naye users ke liye 3 simple steps:
-
-// Search: Apni pasand ki job dhoondo.
-
-// Apply: Profile banao aur apply karo.
-
-// Get Hired: Direct companies se connect karo.
-
-// 4. Featured Jobs (Trending Jobs)
-// Yahan tum 4-6 top job cards dikha sakte ho (abhi dummy data use kar lo). Isse page bhara-bhara aur active lagta hai.
-
-// 5. Stats / Trust Bar
-// Agar project ko thoda serious dikhana hai:
-
-// "10,000+ Active Jobs", "500+ Companies", "1M+ Users".
-
-// Isse portal ki authority banti hai.
