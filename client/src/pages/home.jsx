@@ -2,6 +2,7 @@ import { Briefcase, Figma, Github, Lamp, Mail, MapPin, Search, SearchX, IdCardLa
 import CountUp from 'react-countup';
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
     const icons = [
@@ -11,6 +12,9 @@ export const Home = () => {
     ];
 
     const [index, setIndex] = useState(0);
+    const [job,setJob] = useState("");
+    const [location,setLocation]= useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -19,6 +23,21 @@ export const Home = () => {
         return () => clearInterval(timer);
     }, []);
 
+    const handleChange = (e)=>{
+        setJob(e.target.value);
+    }
+    const handleChangeLocation = (e)=>{
+        setLocation(e.target.value)
+    }
+    const handleSearch = (e)=>{
+        e.preventDefault();
+        navigate(`/list?q=${job}&l=${location}`)
+    }
+    const handleKeyDown=(e)=>{
+        if(e.key==="Enter"){
+            handleSearch(e)
+        }
+    }
     return (
         <>
             <section className=" flex flex-col items-center justify-center w-full min-h-screen bg-[#020617] overflow-hidden text-white pb-40">
@@ -47,13 +66,19 @@ export const Home = () => {
                 <div className="flex flex-col md:flex-row items-center w-[90%] max-w-4xl gap-4 mt-12 p-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl z-10 shadow-2xl">
                     <div className="flex items-center flex-1 px-4 gap-3 border-r border-white/10 w-full">
                         <Search className="text-blue-400" />
-                        <input type="text" placeholder="Job title or keywords" className="bg-transparent w-full p-3 outline-none text-white placeholder:text-gray-400" />
+                        <input type="text" placeholder="Job title or keywords" className="bg-transparent w-full p-3 outline-none text-white placeholder:text-gray-400" 
+                        value={job}
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}/>
                     </div>
                     <div className="flex items-center flex-1 px-4 gap-3 w-full">
                         <MapPin className="text-blue-400" />
-                        <input type="text" placeholder="City or zip code" className="bg-transparent w-full p-3 outline-none text-white placeholder:text-gray-400" />
+                        <input type="text" placeholder="City or zip code" className="bg-transparent w-full p-3 outline-none text-white placeholder:text-gray-400"
+                        value={location}
+                        onChange={handleChangeLocation}
+                        onKeyDown={handleKeyDown} />
                     </div>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-2xl transition-all hover:scale-105 active:scale-95 w-full md:w-auto">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-2xl transition-all hover:scale-105 active:scale-95 w-full md:w-auto" onClick={handleSearch}>
                         Search
                     </button>
                 </div>
