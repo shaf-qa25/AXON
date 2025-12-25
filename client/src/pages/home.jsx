@@ -31,7 +31,8 @@ export const Home = () => {
     }
     const handleSearch = (e)=>{
         e.preventDefault();
-        navigate(`/list?q=${job}&l=${location}`)
+        if(!job.trim()) return alert("Bhai, kuch toh search kar le!"); // Choti si check
+        navigate(`/list?q=${encodeURIComponent(job)}&l=${encodeURIComponent(location)}`)
     }
     const handleKeyDown=(e)=>{
         if(e.key==="Enter"){
